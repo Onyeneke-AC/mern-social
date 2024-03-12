@@ -2,10 +2,6 @@ const User = require("../models/User");
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
 
-router.get("/", (req, res) => {
-    res.send("hey it's users route");
-})
-
 // update user
 
 router.put("/:id", async (req,res) => {
@@ -49,7 +45,7 @@ router.delete("/:id", async (req,res) => {
 // get a user
 
 router.get("/", async (req, res) => {
-    const userId = req.query.userId;
+    const userId = req.query.userId
     const username = req.query.username;
     try {
         // if there is a userId  in the query string use that to find the user else use the username

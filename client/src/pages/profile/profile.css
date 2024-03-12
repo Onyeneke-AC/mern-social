@@ -39,9 +39,11 @@
 
 .profileInfoName {
     font-size: 24px;
+    margin-bottom: 20px;
+    margin-top: 10px;
 }
 
-.profileInfoDec {
+.profileInfoDesc {
     font-weight: 300;
 }
 
