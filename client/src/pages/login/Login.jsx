@@ -3,14 +3,12 @@ import { useContext, useRef } from 'react';
 import { loginCall } from '../../apiCalls';
 import  { AuthContext } from '../../context/AuthContext';
 import ReactLoading from 'react-loading'
-// import  CircularProgress from '@mui/material/CircularProgress';
-// import Box from '@mui/material/Box';
 
 export default function Login() {
 
   const email = useRef();
   const password = useRef();
-  const { user, isFetching, error, dispatch } = useContext(AuthContext);
+  const { user, isFetching, dispatch } = useContext(AuthContext);
 
   const handleClick = (e) => {
     //prevents the page from refreshing everytime we log in
@@ -32,17 +30,18 @@ export default function Login() {
             <form className="loginBox">
                 <input placeholder='Email' type='email' className="loginInput" ref={email} required/>
                 <input placeholder='Password' type='password' className="loginInput" ref={password} minLength="6" required/>
-                <button className="loginButton">
-                  { isFetching 
-                  ? // <Box sx={{ display: 'flex',  }}>
-                      // <CircularProgress color="success"/>
-                    // </Box>
-                    <ReactLoading type={'spin'} color={'#fff'} height={20} width={20} className='loader' />
-                  : "Log In" }
+                <button className="loginButton" type='submit' disabled={isFetching}>
+                  { isFetching ? 
+                  (<ReactLoading type={'spin'} color={'#fff'} height={20} width={20} className='loader' />
+                  ) : ("Log In")
+                  }
                 </button>
                 <span className="loginForgot">Forgot Password ?</span>
                 <button className="loginRegisterButton">
-                    Create a New Account
+                  { isFetching ? 
+                  (<ReactLoading type={'spin'} color={'#fff'} height={20} width={20} className='loader' />
+                  ) : ("Create A New Account")
+                  }
                 </button>
             </form>
         </div>

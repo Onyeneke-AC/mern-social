@@ -5,6 +5,7 @@ import Rightbar from "../../components/rightbar/Rightbar"
 import './home.css'
 
 function Home() {
+  
   return (
     <>
       <Topbar />
