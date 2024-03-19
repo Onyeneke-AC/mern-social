@@ -23,6 +23,7 @@ mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopol
     console.error(err)
 });
 
+app.use("/images", express.static(path.join(__dirname, "public/images")));
 
 //middleware
 app.use(express.json())
@@ -34,7 +35,7 @@ const storage = multer.diskStorage({
         cb(null, "public/images");
     },
     filename: (req, file, cb) => {
-        cb(null, file.originalname);
+        cb(null, req.body.name);
     },
 })
 
