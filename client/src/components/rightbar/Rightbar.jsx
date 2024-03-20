@@ -1,14 +1,22 @@
 import './rightbar.css'
 import { Users } from '../../dummyData'
 import Online from '../online/Online'
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
+import {Add, Remove} from '@mui/icons-material'
 
 export default function Rightbar({user}) {
 
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
     const [friends, setFriends] = useState([]);
+    const {user: currentUser} = useContext(AuthContext);
+    const [followed, setFollowed] = useState(false);
+
+    useEffect(() => {
+      setFollowed(currentUser.followings.includes(user?.id))
+    }, [currentUser, user.id]);
 
     useEffect(() => {
       const getFriends = async () => {
@@ -23,6 +31,14 @@ export default function Rightbar({user}) {
       };
       getFriends();
     }, [user]);
+
+    const handleClick = async () => {
+      try{
+
+      } catch(err) {
+        console.log(err);
+      }
+    }
     
     const HomeRightBar = () => {
 
@@ -50,6 +66,12 @@ export default function Rightbar({user}) {
   const ProfileRightBar = () => {
     return (
     <>
+    {user.username !== currentUser.username && (
+      <button className="rightbarFollowButton" onClick={handleClick}>
+        {followed? 'Unfollow' : 'Follow'}
+        {followed? <Remove /> : <Add />}
+      </button>
+    )}
       <h4 className="rightbarTitle">User Information</h4>
       <div className="rightbarInfo">
         <div className="rightbarInfoItem">
